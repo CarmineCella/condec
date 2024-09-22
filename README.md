@@ -1,4 +1,4 @@
-# CONDEC
+# {Condec}
 
 Multi-channel convolution and deconvolution. 
 
