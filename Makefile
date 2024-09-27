@@ -1,31 +1,36 @@
-# Makefile for compiling all .cpp files in the current folder
-
 # Compiler
 CXX = g++
 CXXFLAGS = -std=c++11 -Wall -Wextra -O2
 
-# Find all .cpp files in the current directory
-SRCS = $(wildcard *.cpp)
+# Source files for different targets
+CONDEC_SRC = condec.cpp
+FEATURES_SRC = features.cpp
 
-# Generate object file names by replacing .cpp with .o
-OBJS = $(SRCS:.cpp=.o)
+# Object files
+CONDEC_OBJ = $(CONDEC_SRC:.cpp=.o)
+FEATURES_OBJ = $(FEATURES_SRC:.cpp=.o)
 
-# Output executable name
-TARGET = condec
+# Output executable names
+CONDEC_TARGET = condec
+FEATURES_TARGET = features
 
-# Default target
-all: $(TARGET)
+# Default target: build both executables
+all: $(CONDEC_TARGET) $(FEATURES_TARGET)
 
-# Link the object files to create the executable
-$(TARGET): $(OBJS)
+# Compile condec executable
+$(CONDEC_TARGET): $(CONDEC_OBJ)
 	$(CXX) $(CXXFLAGS) -o $@ $^
 
-# Compile the source files into object files
+# Compile features executable
+$(FEATURES_TARGET): $(FEATURES_OBJ)
+	$(CXX) $(CXXFLAGS) -o $@ $^
+
+# Compile individual source files into object files
 %.o: %.cpp
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
-# Clean up object files and executable
+# Clean up object files and executables
 clean:
-	rm -f $(OBJS) $(TARGET)
+	rm -f $(CONDEC_OBJ) $(FEATURES_OBJ) $(CONDEC_TARGET) $(FEATURES_TARGET)
 
 .PHONY: all clean

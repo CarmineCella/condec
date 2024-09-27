@@ -1,0 +1,7 @@
+x "file1.wav"
+y "file2.wav"
+out "test.wav"
+
+filter y 0.001
+deconv x y
+
